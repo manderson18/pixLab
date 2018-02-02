@@ -99,7 +99,16 @@ public class Picture extends SimplePicture
       }
     }
   }
-  
+  public void keepOnlyBlue(){
+      Pixel [][] pixels = this.getPixels2D();
+      for (Pixel[] rowArray : pixels)
+      {
+          for (Pixel pixelObj : rowArray){
+              pixelObj.setRed(0);
+              pixelObj.setGreen(0);
+          }
+      }
+  }
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
     * from left to right */
@@ -219,7 +228,7 @@ public class Picture extends SimplePicture
     }
   }
   
-  
+
   /* Main method for testing - each class in Java can have a main 
    * method 
    */
@@ -227,8 +236,14 @@ public class Picture extends SimplePicture
   {
     Picture beach = new Picture("beach.jpg");
     beach.explore();
-    beach.zeroBlue();
-    beach.explore();
+    //beach.zeroBlue();
+    //beach.explore();
+      beach.keepOnlyBlue();
+      beach.explore();
+    DigitalPicture p = new SimplePicture();
+      DigitalPicture u = new Picture();
+      SimplePicture hh = new Picture();
+      //Picture gd = new SimplePicture();
   }
   
 } // this } is the end of class Picture, put all new methods before this

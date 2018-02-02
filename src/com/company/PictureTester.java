@@ -1,5 +1,7 @@
 package com.company;
 
+import java.awt.*;
+
 /**
  * This class contains class (static) methods
  * that will help you test the Picture class 
@@ -8,7 +10,7 @@ package com.company;
  * 
  * @author Barbara Ericson 
  */
-public class PictureTester
+public abstract class PictureTester implements DigitalPicture
 {
   /** Method to test zeroBlue */
   public static void testZeroBlue()
@@ -18,7 +20,15 @@ public class PictureTester
     beach.zeroBlue();
     beach.explore();
   }
-  
+
+  public static void testNegate(){
+    Picture beach = new Picture("beach.jpg");
+    beach.explore();
+    beach.zeroBlue();
+    beach.explore();
+
+}
+
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
   {
@@ -27,7 +37,7 @@ public class PictureTester
     caterpillar.mirrorVertical();
     caterpillar.explore();
   }
-  
+
   /** Method to test mirrorTemple */
   public static void testMirrorTemple()
   {
@@ -36,7 +46,7 @@ public class PictureTester
     temple.mirrorTemple();
     temple.explore();
   }
-  
+
   /** Method to test the collage method */
   public static void testCollage()
   {
@@ -44,7 +54,7 @@ public class PictureTester
     canvas.createCollage();
     canvas.explore();
   }
-  
+
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
   {
@@ -52,11 +62,10 @@ public class PictureTester
     swan.edgeDetection(10);
     swan.explore();
   }
-  
+
   /** Main method for testing.  Every class can have a main
     * method in Java */
-  public static void main(String[] args)
-  {
+  public static void main(String[] args) {
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
@@ -83,4 +92,27 @@ public class PictureTester
     //testClearBlueOverValue(200);
     //testGetAverageForColumn(0);
   }
-}
+  public void edgyDetection(int edgeDist) {
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    Pixel[][] pixels = this.getPixels2D();
+    Color rightColor = null;
+
+    for(int row = 0; row < pixels.length; row++){
+      for (int col = 0; col < pixels[0].length-1; col++){
+
+        leftPixel = pixels[row][col];
+        rightPixel = pixels[row][col+1];
+        rightColor = rightPixel.getColor();
+        if(leftPixel.colorDistance(rightColor)>edgeDist)
+          leftPixel.setColor(Color.BLACK);
+          else
+          leftPixel.setColor(Color.WHITE);
+
+
+      }
+      }
+    }
+
+  }
+
